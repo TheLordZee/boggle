@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Boggle!
+{% endblock %}
+
+{% block content %}
+<div id="container">
+    <h2 class="text-center"> High Score: <i id="high-score">{{high_score}}</i></h2>
+    <h2 class="text-center">Score: <i id="score">0</i></h2>
+    <table id="game">
+        <tbody>{% for row in board %}
+            <tr>{% for char in row %}
+                <td class = "border border-light">
+                    <div class = "text-center align-items-center justify-content-center text-light">{{char}}</div>
+                </td>{% endfor %}
+            </tr>{% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div id="form" class="text-center">
+    <form id="guess-form">
+        <input type="text">
+        <button>Submit Guess</button>
+    </form>
+</div>
+
+<script src="/static/game.js"></script>
+{% endblock %}
