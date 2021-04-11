@@ -1,5 +1,49 @@
 #game td {
-	width: 16vh;
-	height: 16vh;
+	width: 10vh;
+	height: 10vh;
 	background-color: #2d32af;
+}
+
+#game div {
+	font-size: 3vw;
+}
+
+#board {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#form {
+	display: none;
+	padding-top: 2%;
+	padding-bottom: 5%;
+}
+
+#endgame {
+	height: 120%;
+	display: none;
+	position: absolute;
+	background-color: rgba(1, 25, 75, 0.75);
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	flex-direction: column;
+	align-items: center;
+	color: white;
+	justify-content: space-around;
+}
+
+#endgame h2 {
+	font-size: 20vw;
+}
+
+#new-high {
+	display: none;
+}
+
+#message {
+	margin-left: 10%;
+	font-size: 2vw;
 }
