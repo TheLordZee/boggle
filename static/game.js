@@ -10,7 +10,7 @@ $('#start-game').on('click', function () {
 $('#form').on('submit', async function (e) {
     e.preventDefault();
     const guess = e.target.elements[0].value;
-    await check_guess(guess)
+    await currGame.check_guess(guess)
     $('#guess')[0].value = ''
 });
 
@@ -35,21 +35,20 @@ class Game{
     }
 
     async check_guess(guess) {
-        const checked = await axios.get(`/guess?guess=$ {guess}`)
-        const is_found = checked.data['found']
-        const is_checked = checked.data['on_board']
-        this.displayMessage(is_checked, is_found)
-        if ( is_found === false && is_checked === "ok") {
-            score++;
+        const checked = await axios.get(`/guess?guess=${guess}`)
+        const isFound = checked.data['found']
+        const isChecked = checked.data['on_board']
+        this.displayMessage(isChecked, isFound)
+        if (isFound === false && isChecked === "ok") {
+            this.score++;
             console.log("Found new word")
             await axios({
                 url: 'http://127.0.0.1:5000/found',
                 method: 'POST',
-                data: { guess }
+                data: { 'guess': guess }
             })
-            $('#score')[0].innerText = score
+            $('#score')[0].innerText = this.score
         }
-        num = 0
     }
 
     displayMessage(status, found) {
@@ -59,10 +58,10 @@ class Game{
         }
         switch (status) {
             case 'ok':
-                $('#message')[0].innerText = 'Found New     Word'
+                $('#message')[0].innerText = 'Found New Word'
                 break;
             case 'not-on-board':
-                $('#message')[0].innerText = "Word Not  On Board"
+                $('#message')[0].innerText = "Word Not On Board"
                 break;
             case 'not-word':
                 $('#message')[0].innerText = 'Not A Word'

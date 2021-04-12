@@ -4,6 +4,7 @@ import json
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] ="EDFEHG^#T^3rty376gcdaw2"
+app.debug = True
 
 boggle_game = Boggle()
 
@@ -50,9 +51,7 @@ def found_word():
 def end_game():
     """Counts up the number of plays and returns the high score"""
     score = int(request.args[' score'])
-    print('***********************************')
-    print(request.args)
-    print('***********************************')
+   
     if session.get('num_plays'):
         session['num_plays'] += 1
     else:
